@@ -22,10 +22,15 @@ const TASKS: Array<Task> = [
 
 export class TasksComponent implements OnInit{
   public tasks: any[];
+  public selectedTask: Task;
 
   constructor(){  }
 
   ngOnInit(){
     this.tasks = TASKS;
+  }
+
+  public onSelect(task: Task): void{
+    this.selectedTask = task;
   }
 }
