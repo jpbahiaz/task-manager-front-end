@@ -17,6 +17,7 @@ const TASKS: Array<Task> = [
 @Injectable()
 
 export class TaskService{
+
     public getTasks(): Promise<Task[]>{
         let promise: Promise<Task[]> = new Promise((resolve, reject) => {
             if(TASKS.length > 0){
@@ -28,5 +29,9 @@ export class TaskService{
         })
 
         return promise;
+    }
+
+    public getImportantTasks(): Promise<Task[]>{
+        return Promise.resolve(TASKS.slice(0, 3));
     }
 }

@@ -6,7 +6,6 @@ import { TaskService } from './shared/task.service';
 @Component({
   selector: 'tasks',
   templateUrl: 'tasks.component.html',
-  providers: [ TaskService ]
   //providers: [{ provide: TaskService, useClass: TaskService }] //Configuração de injeção de dependência
 })
 
