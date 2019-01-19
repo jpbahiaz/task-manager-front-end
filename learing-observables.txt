@@ -1,0 +1,36 @@
+EXEMPLO: YOUTUBE
+
+    CANAL (observable)
+        - listaInscritos[]
+
+        - receberInscricao(inscrito)
+        - removerInscricao(inscrito)
+        - notificarInscritos(listaInscritos[])
+            inscrito.receberNotificacao(novoVideo)
+
+    
+    INSCRITOS (observer)
+        - receberNotificacao(novoVideo)
+
+
+
+========================================================================
+
+IMPLEMENTAÇÃO NO ANGULAR
+
+
+
+    OBSERVABLE
+        - subscribe(observer)
+        - usubscribe(observer)
+        - notify
+            - observer.next(newData)
+            - observer.error(err)
+            - observer.complete()
+
+    OBSERVER
+        - next(newData)
+        - error(err) *
+        - complete() *
+
+    * Podem nunca ser chamados
