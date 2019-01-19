@@ -19,7 +19,8 @@ export class TasksComponent implements OnInit{
     this.taskService.getTasks()
       .subscribe(
         tasks => this.tasks = tasks,
-        error => alert("Ocorreu um erro no servidor tente mais tarde.")        
+        error => alert("Ocorreu um erro no servidor tente mais tarde."),
+        () => console.log("Get Tasks Completed")
       )
   }
 
