@@ -39,7 +39,18 @@ export class TasksComponent implements OnInit{
             this.newTask = new Task(null, '');
           },
           error => alert("Ocorreu um erro no servidor tente mais tarde."),
-          () => console.log("Create Tasks Completed")
+          () => console.log("Create Task Completed")
+        )
+    }
+  }
+
+  public deleteTask(task: Task){
+    if( confirm(`Deseja realmente excluir a tarefa "${task.title}"?`) ){
+      this.taskService.deleteTask(task.id)
+        .subscribe(
+          () => this.tasks = this.tasks.filter(t => t !== task),
+          () => alert("Ocorreu um erro no servidor, tente mais tarde"),
+          () => console.log("Delete Task completed")
         )
     }
   }

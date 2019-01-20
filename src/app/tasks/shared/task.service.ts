@@ -47,6 +47,16 @@ export class TaskService{
             .map(response => response.json().data as Task)
     }
 
+    public deleteTask(id: number): Observable<null>{
+        let url = `${this.tasksUrl}/${id}`;
+        let headers = new Headers({'Content-type': 'application/json'})
+
+        return this.http.delete(url, { headers: headers })
+            .catch(this.handleErrors)
+            .map(() => null)
+
+    }
+
     public updateTask(task: Task): Observable<Task>{
         let url = `${this.tasksUrl}/${task.id}`
         let body = JSON.stringify(task);
