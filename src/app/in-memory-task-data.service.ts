@@ -8,14 +8,13 @@ export class InMemoryTaskDataService implements InMemoryDbService{
 
     public createDb(){
         let tasks =  [
-            { id: 1, title: 'Fazer tarefa 1' },
-            { id: 2, title: 'Fazer tarefa 2' },
-            { id: 3, title: 'Fazer tarefa 3' },
-            { id: 4, title: 'Fazer tarefa 4' },
-            { id: 5, title: 'Fazer tarefa 5' },
-            { id: 6, title: 'Fazer tarefa 6' },
-            { id: 7, title: 'Fazer tarefa 7' },
-            { id: 8, title: 'Fazer tarefa 8' },
+            { id: 1, title: 'Comprar celular' },
+            { id: 2, title: 'Assistir aula de Rails' },
+            { id: 3, title: 'Ser cabuloso' },
+            { id: 4, title: 'Malhar e ficar mutante' },
+            { id: 5, title: 'Ver aula de Angular' },
+            { id: 6, title: 'Descobrir os pwas' },
+            { id: 7, title: 'Comer japa' },
         ]
 
         return { tasks }
