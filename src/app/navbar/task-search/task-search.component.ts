@@ -6,11 +6,6 @@ import { TaskService } from "app/tasks/shared/task.service";
 
 import { Observable } from "rxjs/Observable";
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
-
 
 @Component({
     selector: 'task-search',
