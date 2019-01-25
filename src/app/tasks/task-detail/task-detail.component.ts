@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -10,7 +10,7 @@ import { TaskService } from '../shared/task.service'
     templateUrl: './task-detail.component.html'
 })
 
-export class TaskDetailComponent implements OnInit{
+export class TaskDetailComponent implements OnInit, AfterViewInit{
     public task: Task;
     public taskDoneOptions: Array<any> = [
         { value: false, text: "Pendente" },
@@ -31,6 +31,9 @@ export class TaskDetailComponent implements OnInit{
                     error => alert("Ocorreu um erro no servidor tente mais tarde."),
                     () => console.log("Get Tasks by id Completed")
                 );
+    }
+
+    ngAfterViewInit(){
     }
 
     public goBack(){
