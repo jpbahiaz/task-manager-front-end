@@ -20,7 +20,7 @@ export class TasksComponent implements OnInit{
   ngOnInit(){
     this.taskService.getAll()
       .subscribe(
-        tasks => this.tasks = tasks,
+        tasks => this.tasks = tasks.sort((a, b) => b.id - a.id),
         error => alert("Ocorreu um erro no servidor tente mais tarde."),
         () => console.log("Get Tasks Completed")
       )
@@ -35,7 +35,7 @@ export class TasksComponent implements OnInit{
       this.taskService.create(this.newTask)
         .subscribe(
           task => {
-            this.tasks.push(task);
+            this.tasks.unshift(task);
             this.newTask = new Task(null, '');
           },
           error => alert("Ocorreu um erro no servidor tente mais tarde."),
