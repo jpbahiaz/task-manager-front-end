@@ -38,7 +38,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
         this.route.params    
             .switchMap((params: Params) => this.taskService.getById(+params['id']))
                 .subscribe(
-                    task => this.task = task,
+                    task => this.setTask(task),
                     error => alert("Ocorreu um erro no servidor tente mais tarde."),
                     () => console.log("Get Tasks by id Completed")
                 );
@@ -48,7 +48,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
         $('#deadline').datetimepicker({
             'sideBySide': true,
             'locale': 'pt-br'
-        }).on('dp.change', () => this.task.deadline = $('#deadline').val());
+        }).on('dp.change', () => this.reactiveTaskForm.patchValue({ deadline: $('#deadline').val() } ));
+    // }).on('dp.change', () => this.reactiveTaskForm.get('deadline').setValue($('#deadline').val() ));
     }
 
     public goBack(){
@@ -66,5 +67,27 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 
     public showFieldError(field): boolean{
         return field.invalid && ( field.touched || field.dirty )
+    }
+
+    public setTask(task: Task): void{
+        this.task = task;
+
+        // setValue
+        // let formModel = {
+        //     title: task.title || null,
+        //     description: task.description || null,
+        //     done: task.done || null,
+        //     deadline: task.deadline || null
+        // }
+
+        // this.reactiveTaskForm.setValue(formModel);
+
+        // patchValue
+        // let formModel = {
+        //     title: task.title || null,
+        //     description: task.description || "Teste"
+        // }
+
+        this.reactiveTaskForm.patchValue(task);
     }
 }
