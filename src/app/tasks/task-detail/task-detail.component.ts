@@ -8,16 +8,15 @@ import { TaskService } from '../shared/task.service'
 
 @Component({
     selector: 'task-detail',
-    templateUrl: './task-detail.component.html'
+    templateUrl: './task-detail.component.html',
+    styles: [".form-control-feedback { margin-right: 20px; }"]
 })
 
 export class TaskDetailComponent implements OnInit, AfterViewInit{
     public reactiveTaskForm: FormGroup;
     public task: Task;
-    public taskDoneOptions: Array<any> = [
-        { value: false, text: "Pendente" },
-        { value: false, text: "Feita" }
-    ]
+    public taskDoneOptions: Array<any>;
+
 
     constructor(
         private taskService: TaskService,
@@ -25,6 +24,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
         private location: Location,
         private formBuilder: FormBuilder
     ){ 
+        this.taskDoneOptions  = [
+            { value: false, text: "Pendente" },
+            { value: false, text: "Feita" }
+        ];
+
         this.reactiveTaskForm = this.formBuilder.group({
             title: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
             deadline: [null, Validators.required],
@@ -75,10 +79,6 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
             )
     }
 
-    public showFieldError(field): boolean{
-        return field.invalid && ( field.touched || field.dirty )
-    }
-
     public setTask(task: Task): void{
         this.task = task;
 
@@ -99,5 +99,31 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
         // }
 
         this.reactiveTaskForm.patchValue(task);
+    }
+
+    // Form errors methods
+
+    public showFieldError(fieldNAme: string): boolean{
+        let field = this.getField(fieldNAme);
+
+        return field.invalid && ( field.touched || field.dirty )
+    }
+
+    public fieldClassForErrorOrSuccess(fieldName: string){
+        return {
+            "has-error": this.showFieldError(fieldName),
+            "has-success": this.getField(fieldName).valid
+        }
+    }
+
+    public iconClassForErrorOrSuccess(fieldName: string){
+        return {
+            "glyphicon-remove": this.showFieldError(fieldName),
+            "glyphicon-ok": this.getField(fieldName).valid
+        }
+    }
+
+    public getField(fieldName: string){
+        return this.reactiveTaskForm.get(fieldName);
     }
 }
