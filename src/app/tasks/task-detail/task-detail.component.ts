@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
+import { FormUtils } from "../../shared/form.utils";
 import { Task } from '../shared/task.model'
 import { TaskService } from '../shared/task.service'
 
@@ -16,7 +17,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
     public reactiveTaskForm: FormGroup;
     public task: Task;
     public taskDoneOptions: Array<any>;
-
+    public formUtils: FormUtils;
 
     constructor(
         private taskService: TaskService,
@@ -39,6 +40,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
             //     email: ["galba.veloso@birl.com"]
             // })
         })
+        
+        this.formUtils = new FormUtils(this.reactiveTaskForm);
     }
 
     ngOnInit(){
@@ -99,31 +102,5 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
         // }
 
         this.reactiveTaskForm.patchValue(task);
-    }
-
-    // Form errors methods
-
-    public showFieldError(fieldNAme: string): boolean{
-        let field = this.getField(fieldNAme);
-
-        return field.invalid && ( field.touched || field.dirty )
-    }
-
-    public fieldClassForErrorOrSuccess(fieldName: string){
-        return {
-            "has-error": this.showFieldError(fieldName),
-            "has-success": this.getField(fieldName).valid
-        }
-    }
-
-    public iconClassForErrorOrSuccess(fieldName: string){
-        return {
-            "glyphicon-remove": this.showFieldError(fieldName),
-            "glyphicon-ok": this.getField(fieldName).valid
-        }
-    }
-
-    public getField(fieldName: string){
-        return this.reactiveTaskForm.get(fieldName);
     }
 }
