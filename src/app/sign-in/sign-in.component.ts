@@ -1,9 +1,7 @@
 import { Component } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+
 import { FormUtils } from "app/shared/form.utils";
-
-
-
 
 @Component({
     selector: 'sign-in',
@@ -15,7 +13,7 @@ export class SignInComponent{
 
     constructor(private formBuilder: FormBuilder){
         this.form = this.formBuilder.group({
-            email: [null, Validators.required, Validators.email],
+            email: [null, [Validators.required, Validators.email]],
             password: [null, Validators.required]
         });
 
