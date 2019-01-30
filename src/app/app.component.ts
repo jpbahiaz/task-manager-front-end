@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Gerenciador de tarefas';
+
+  constructor(private tokenService: Angular2TokenService){
+    this.tokenService.init({
+      apiBase: 'api.taskmanager.test:3000'
+    })
+  }
 }
