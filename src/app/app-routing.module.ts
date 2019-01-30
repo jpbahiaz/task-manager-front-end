@@ -7,12 +7,14 @@ import { SignUpComponent } from "./sign-up/sign-up.component";
 import { TasksComponent } from './tasks/tasks.component';
 import { TaskDetailComponent } from './tasks/task-detail/task-detail.component';
 
+import { AuthGuard } from "./guards/auth.guard";
+
 const ROUTES = RouterModule.forRoot([
-    { path: 'dashboard', component: DashboardComponent },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'sign-in', component: SignInComponent },
     { path: 'sign-up', component: SignUpComponent },
-    { path: 'tasks', component: TasksComponent },
-    { path: 'tasks/:id', component: TaskDetailComponent },
+    { path: 'tasks', component: TasksComponent, canActivate: [AuthGuard] },
+    { path: 'tasks/:id', component: TaskDetailComponent, canActivate: [AuthGuard] },
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
   ])
 
