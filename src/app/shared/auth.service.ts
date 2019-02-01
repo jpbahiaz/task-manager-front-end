@@ -17,9 +17,14 @@ export class AuthService {
             .catch(this.handleErrors)
     }
 
-    public signIn(uid: string, password: string){
-        // Call Angular2-Token SignIn method here!
-        // returns an Observable<Response>
+    public signIn(uid: string, password: string): Observable<Response>{
+        let signInData = {
+            email: uid,
+            password: password
+        };
+
+        return this.tokenService.signIn(signInData)
+            .catch(this.handleErrors)
     }
 
     public signOut(): Observable<Response>{

@@ -1,6 +1,17 @@
 <h1 class="page-header">Sign in</h1>
 
 <div class="jumbotron">
+    <div *ngIf="formErrors" class="alert alert-danger">
+        <strong>
+            <span class="glyphicon glyphicon-warning-sign"></span>
+            Ocorreu um erro ao entrar no sistema.
+        </strong>
+
+        <ul>
+            <li *ngFor="let error of formErrors">{{ error }}</li>
+        </ul>
+    </div>
+
     <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signInUser()">
         <div class="form-group has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('email')">
             <label for="email" class="col-sm-4 control-label">Email</label>
@@ -29,7 +40,7 @@
 
         <div class="form-group">
             <div class="col-sm-offset-4 col-sm-8">
-                <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Sign in</button>
+                <button type="submit" [disabled]="form.invalid || submitted" class="btn btn-primary">Sign in</button>
             </div>
         </div>
     </form>
