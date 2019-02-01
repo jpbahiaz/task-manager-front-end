@@ -14,18 +14,32 @@ import { User } from "app/shared/user.model";
 export class SignUpComponent{
     public userForm: FormGroup;
     public formUtils: FormUtils;
+    public submitted: boolean;
+    public formErrors: string[];
 
     constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService){
         this.setupForm();
         this.formUtils = new FormUtils(this.userForm);
+        this.submitted = false;
+        this.formErrors = null;
     }
 
     public signUpUser(){
+        this.submitted = true;
         this.authService.signUp(this.userForm.value as User)
             .subscribe(
                 () => {
                     alert('Parabéns, sua conta foi criada com sucesso!')
                     this.router.navigate(['/dashboard'])
+                    this.formErrors = null;
+                },
+                (error) => {
+                    this.submitted = false;
+                    if(error.status === 422)
+                        this.formErrors = JSON.parse(error._body).errors.full_messages
+                    else
+                        this.formErrors = ["Não foi possível processar a sua solicitação. Por favor tente mais tarde"]
+                        
                 }
             )
     }
