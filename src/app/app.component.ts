@@ -12,7 +12,8 @@ export class AppComponent {
 
   constructor(private tokenService: Angular2TokenService){
     this.tokenService.init({
-      apiBase: 'http://api.taskmanager.test:3000',
+      // apiBase: 'http://api.taskmanager.test:3000',
+      apiBase: 'https://taskmanager-api-galba.herokuapp.com',
       globalOptions: {
         headers: {
           'Content-type': 'application/json',
